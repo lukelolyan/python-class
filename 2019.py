@@ -89,42 +89,41 @@ if __name__ == "__main__":
 
 # 5
 def apply_substitution(sequence, rules, step_count):
-    steps = []  # To store the details of each substitution
+    steps = []  
 
     for _ in range(step_count):
         for rule_index, (pattern, replacement) in enumerate(rules, start=1):
-            # Find the first occurrence of the pattern in the sequence
+            
             pos = sequence.find(pattern)
             if pos != -1:
-                # Perform the substitution
+                
                 new_sequence = sequence[:pos] + replacement + sequence[pos + len(pattern):]
 
-                # Record the substitution details (1-indexed position)
+            
                 steps.append((rule_index, pos + 1, new_sequence))
 
-                # Update the sequence
                 sequence = new_sequence
 
-                # Move to the next step
+        
                 break
     return steps
 
 
 def main():
-    # Read the substitution rules
+ 
     rules = []
     for _ in range(3):
         pattern, replacement = input().strip().split()
         rules.append((pattern, replacement))
 
-    # Read S, I, F
+
     S, I, F = input().strip().split()
     S = int(S)
 
-    # Apply the substitution rules
+
     steps = apply_substitution(I, rules, S)
 
-    # Output the steps
+
     for step in steps:
         print(step[0], step[1], step[2])
 
